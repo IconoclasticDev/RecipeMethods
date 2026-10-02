@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecipeMethods — Kitchen Companion. A method, not a guess.</title>
+  <meta name="description" content="RecipeMethods turns your ingredients or food photos into reliable, clear cooking methods. Kitchen companion RM-001." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="state-initial">
+
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <svg class="brand-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="7" y="1" width="4" height="4" transform="rotate(45 7 1)" fill="#D4A23A" />
+          <rect x="13" y="7" width="4" height="4" transform="rotate(45 13 7)" fill="#D4A23A" />
+          <rect x="7" y="13" width="4" height="4" transform="rotate(45 7 13)" fill="#D4A23A" />
+          <rect x="1" y="7" width="4" height="4" transform="rotate(45 1 7)" fill="#D4A23A" />
+        </svg>
+        <span class="brand-name"><strong>Recipe</strong>Methods</span>
+      </div>
+      <div class="topbar-right">
+        <span class="status-dot"></span>
+        <span class="topbar-meta">KITCHEN COMPANION &nbsp;/&nbsp; 01</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION 01: START HERE -->
+    <section class="section-hero" id="section-01">
+      <div class="container hero-grid">
+        
+        <!-- Left Hero Content -->
+        <div class="hero-left">
+          <div class="eyebrow"><span class="step-num">01</span> <span class="step-title">START HERE</span></div>
+          <h1 class="hero-heading">
+            What are<br>
+            you<br>
+            <span class="heading-highlight">making?</span>
+          </h1>
+          <p class="hero-desc">
+            Name the dish or show us what is on the counter. We will turn the first clue into a method you can trust.
+          </p>
+          <div class="hero-trust">
+            <svg class="viewfinder-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 5V2.5C2 2.22386 2.22386 2 2.5 2H5" stroke="#D4A23A" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 5V2.5C14 2.22386 13.7761 2 13.5 2H11" stroke="#D4A23A" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M2 11V13.5C2 13.7761 2.22386 14 2.5 14H5" stroke="#D4A23A" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 11V13.5C14 13.7761 13.7761 14 13.5 14H11" stroke="#D4A23A" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>No chat. Just a clear next step.</span>
+          </div>
+        </div>
+
+        <!-- Right Input Card -->
+        <div class="hero-right">
+          <div class="input-card">
+            <div class="card-gold-bar"></div>
+            
+            <div class="card-header">
+              <span class="card-tag">CAPTURE A STARTING POINT</span>
+              <span class="card-id">RM-001</span>
+            </div>
+
+            <form id="recipe-form" onsubmit="return false;">
+              <div class="field-group">
+                <label for="dish-input" class="field-label">DISH NAME</label>
+                <div class="input-row">
+                  <svg class="chef-hat-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#201B18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/>
+                    <line x1="6" y1="17" x2="18" y2="17"/>
+                  </svg>
+                  <input type="text" id="dish-input" value="" placeholder="e.g. golden chickpea skillet" autocomplete="off" />
+                  <button type="button" id="clear-dish-btn" class="clear-btn" aria-label="Clear input">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                      <line x1="1" y1="1" x2="11" y2="11"/>
+                      <line x1="11" y1="1" x2="1" y2="11"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="field-underline"></div>
+                <p class="field-hint">A dish, a craving, or the last thing you bought.</p>
+              </div>
+
+              <!-- Quick Presets -->
+              <div class="quick-presets">
+                <span class="presets-label">TRY:</span>
+                <button type="button" class="preset-pill" data-dish="golden chickpea skillet">Golden Chickpea Skillet</button>
+                <button type="button" class="preset-pill" data-dish="rustic tomato shakshuka">Tomato Shakshuka</button>
+                <button type="button" class="preset-pill" data-dish="creamy garlic pasta">Garlic Pasta</button>
+              </div>
+
+              <div class="divider-row">
+                <span class="divider-line"></span>
+                <span class="divider-text">OR USE A PHOTO</span>
+                <span class="divider-line"></span>
+              </div>
+
+              <!-- Photo Upload Row -->
+              <div class="photo-row">
+                <div class="photo-dropzone" id="photo-dropzone" tabindex="0" role="button" aria-label="Upload food photo">
+                  <input type="file" id="file-input" accept="image/*" class="visually-hidden" />
+                  <div class="dropzone-left">
+                    <svg class="photo-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <div class="dropzone-text">
+                      <span class="dropzone-title" id="dropzone-title">Choose a food photo</span>
+                      <span class="dropzone-sub">JPG, PNG, OR HEIC · 12 MB MAX</span>
+                    </div>
+                  </div>
+                  <div class="dropzone-right">
+                    <svg class="upload-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="19" x2="12" y2="5"/>
+                      <polyline points="5 12 12 5 19 12"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <button type="button" class="camera-btn" id="camera-btn" aria-label="Use camera">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                    <circle cx="12" cy="13" r="4"/>
+                  </svg>
+                  <span>CAMERA</span>
+                </button>
+              </div>
+
+              <!-- Main Action Button -->
+              <button type="button" id="submit-btn" class="submit-action-btn">
+                <span class="btn-text" id="btn-text">Reveal the recipe</span>
+                <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 02: THE FIRST READ -->
+    <section class="section-first-read" id="section-02">
+      <div class="container">
+        
+        <div class="section-header-row">
+          <div>
+            <div class="eyebrow"><span class="step-num">02</span> <span class="step-title">THE FIRST READ</span></div>
+            <h2 class="section-heading" id="read-heading">See what comes next.</h2>
+          </div>
+          <button type="button" id="start-over-btn" class="start-over-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            <span>START OVER</span>
+          </button>
+        </div>
+
+        <!-- Split Feature Banner -->
+        <div class="feature-banner">
+          
+          <!-- Left: Kitchen Visual / Cutting Board -->
+          <div class="banner-visual">
+            <div class="wood-board" id="wood-board">
+              <svg class="illustration-svg" viewBox="0 0 460 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <!-- Wood texture stripes -->
+                  <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#9A7545" />
+                    <stop offset="35%" stop-color="#A57F4F" />
+                    <stop offset="70%" stop-color="#9E7848" />
+                    <stop offset="100%" stop-color="#8F6B3D" />
+                  </linearGradient>
+
+                  <!-- Tomato gradient -->
+                  <radialGradient id="tomatoGrad" cx="38%" cy="32%" r="65%">
+                    <stop offset="0%" stop-color="#C24838" />
+                    <stop offset="60%" stop-color="#99372B" />
+                    <stop offset="100%" stop-color="#6F231A" />
+                  </radialGradient>
+
+                  <!-- Soft shadows -->
+                  <filter id="softShadow" x="-30%" y="-30%" width="180%" height="180%">
+                    <feDropShadow dx="15" dy="18" stdDeviation="16" flood-color="#1A1410" flood-opacity="0.55" />
+                  </filter>
+                  <filter id="plateShadow" x="-20%" y="-20%" width="220%" height="200%">
+                    <feDropShadow dx="32" dy="20" stdDeviation="24" flood-color="#140E0A" flood-opacity="0.65" />
+                  </filter>
+                </defs>
+
+                <!-- Board planks subtle lines -->
+                <rect width="460" height="300" fill="url(#woodGrad)" />
+                <line x1="110" y1="0" x2="110" y2="300" stroke="#876236" stroke-width="1.5" stroke-opacity="0.4" />
+                <line x1="230" y1="0" x2="230" y2="300" stroke="#876236" stroke-width="1.5" stroke-opacity="0.4" />
+                <line x1="350" y1="0" x2="350" y2="300" stroke="#876236" stroke-width="1.5" stroke-opacity="0.4" />
+
+                <!-- 1. Red Tomato -->
+                <g filter="url(#softShadow)">
+                  <circle cx="160" cy="110" r="54" fill="url(#tomatoGrad)" />
+                  <!-- Tomato stem / calyx -->
+                  <path d="M160 52 C162 46 166 40 172 38 C170 44 167 49 164 54 Z" fill="#3D5B31" />
+                  <path d="M160 54 L152 46 L158 56 L148 58 L158 60 L154 68 L162 62 L168 70 L166 60 L174 58 L164 56 Z" fill="#4B6E3C" />
+                </g>
+
+                <!-- 2. Turmeric Spice Packet ('t') -->
+                <g filter="url(#softShadow)" transform="rotate(-6 320 85)">
+                  <rect x="290" y="55" width="58" height="66" rx="6" fill="#4E2721" />
+                  <rect x="294" y="59" width="50" height="58" rx="4" stroke="#68352D" stroke-width="1.2" fill="none" />
+                  <!-- White serif letter 't' -->
+                  <text x="319" y="96" font-family="'Fraunces', serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">t</text>
+                </g>
+
+                <!-- 3. Lemon Slice (Citrus Wheel) -->
+                <g filter="url(#softShadow)">
+                  <circle cx="340" cy="170" r="44" fill="#DCAE26" />
+                  <circle cx="340" cy="170" r="38" fill="#F0C742" />
+                  <circle cx="340" cy="170" r="34" fill="#E8BD35" />
+                  <circle cx="340" cy="170" r="6" fill="#F7DC78" />
+                  <!-- Lemon radial spokes -->
+                  <circle cx="340" cy="170" r="28" stroke="#F5D86C" stroke-width="1.5" stroke-dasharray="2 6" fill="none" />
+                </g>
+
+                <!-- 4. Chickpea Bowl / Dish with chickpeas -->
+                <g filter="url(#plateShadow)">
+                  <!-- Cast shadow -->
+                  <ellipse cx="230" cy="235" rx="75" ry="32" fill="#1A120D" opacity="0.45" />
+                  <!-- Rustic shallow bowl -->
+                  <ellipse cx="170" cy="225" rx="68" ry="36" fill="#8C663D" />
+                  <ellipse cx="170" cy="223" rx="64" ry="32" fill="#75522F" />
+
+                  <!-- Chickpea seeds nestled inside -->
+                  <circle cx="140" cy="220" r="14" fill="#E2C175" />
+                  <circle cx="160" cy="208" r="13" fill="#E8CB83" />
+                  <circle cx="182" cy="216" r="14" fill="#D9B768" />
+                  <circle cx="152" cy="232" r="13" fill="#ECCF88" />
+                  <circle cx="174" cy="234" r="14" fill="#DFBC6F" />
+                  <circle cx="196" cy="224" r="12" fill="#CFAC5D" />
+                  <circle cx="132" cy="230" r="10" fill="#D3AF62" />
+
+                  <!-- Chickpea highlights -->
+                  <circle cx="138" cy="217" r="4" fill="#F6E4AA" opacity="0.6" />
+                  <circle cx="158" cy="205" r="4" fill="#FBF0BD" opacity="0.7" />
+                  <circle cx="180" cy="213" r="4" fill="#F6E4AA" opacity="0.6" />
+                  <circle cx="150" cy="229" r="4" fill="#FBF0BD" opacity="0.7" />
+                  <circle cx="172" cy="231" r="4" fill="#F6E4AA" opacity="0.6" />
+                </g>
+              </svg>
+            </div>
+            <!-- Dynamic Recipe Picture inside the small window -->
+            <img id="visual-recipe-img" class="recipe-visual-img" src="" alt="Recipe visual" style="display: none;" />
+            <div class="banner-visual-tag">
+              <span class="amber-dot">●</span>
+              <span id="visual-tag-text">A USEFUL FIRST MOVE</span>
+            </div>
+          </div>
+
+          <!-- Right: Readout Panel (Dynamic: Clue Wait vs Analyzed) -->
+          <div class="banner-readout">
+            
+            <!-- State A: Waiting on your clue -->
+            <div class="readout-clue-wait" id="readout-clue-wait">
+              <div class="clue-icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#201B18" stroke-width="1.8">
+                  <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+                  <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+                  <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+                  <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+                  <circle cx="12" cy="12" r="2" fill="#D4A23A"/>
+                </svg>
+              </div>
+              <h3 class="clue-title">Waiting on your clue.</h3>
+              <p class="clue-desc">
+                Give us a name or a photo above. The useful part starts there — no account, no guessing game.
+              </p>
+            </div>
+
+            <!-- State B: Method Analyzed -->
+            <div class="readout-analyzed" id="readout-analyzed">
+              <div class="analyzed-top-row">
+                <div class="analyzed-badge">
+                  <span class="amber-dot">●</span>
+                  <span class="analyzed-tag">JUST ANALYZED</span>
+                </div>
+                <div class="confidence-tag">
+                  KITCHEN CONFIDENCE <strong id="confidence-val">HIGH</strong>
+                </div>
+              </div>
+
+              <h3 class="analyzed-dish-title" id="analyzed-dish-title">Golden chickpea skillet</h3>
+              <p class="analyzed-dish-desc" id="analyzed-dish-desc">
+                Bright, savory, and forgiving. Warm spice and lemon make this one-pan meal work hard on a weeknight.
+              </p>
+
+              <div class="detected-section">
+                <div class="detected-label-row">
+                  <span class="detected-title">DETECTED IN ORDER</span>
+                  <div class="detected-line"></div>
+                </div>
+                
+                <div class="ingredients-chips" id="ingredients-chips">
+                  <!-- Rendered dynamically -->
+                  <span class="chip chip-gold">✓ chickpeas</span>
+                  <span class="chip chip-gold">✓ tomato</span>
+                  <span class="chip chip-gold">✓ red onion</span>
+                  <span class="chip chip-gold">✓ lemon</span>
+                  <span class="chip chip-gold">✓ turmeric</span>
+                  <span class="chip chip-outline">○ cumin</span>
+                  <span class="chip chip-outline">○ parsley</span>
+                </div>
+              </div>
+
+              <div class="analyzed-meta-row" id="analyzed-meta-row">
+                <div class="meta-item">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  <span id="meta-time">25 MIN</span>
+                </div>
+                <div class="meta-item">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 12h14a4 4 0 0 1 4 4v2H2v-6Z"/>
+                    <line x1="20" y1="14" x2="23" y2="14"/>
+                  </svg>
+                  <span id="meta-pan">ONE PAN</span>
+                </div>
+                <div class="meta-item">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/>
+                  </svg>
+                  <span id="meta-difficulty">EASY</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 03: THE METHOD (Revealed only after analysis) -->
+    <section class="section-method" id="section-03">
+      <div class="container">
+        
+        <div class="eyebrow"><span class="step-num">03</span> <span class="step-title">THE METHOD</span></div>
+
+        <!-- Recipe Header & Stats -->
+        <div class="method-header-grid">
+          <div class="method-title-col">
+            <h2 class="method-huge-title" id="method-title">Golden chickpea skillet</h2>
+            <div class="stats-row">
+              <div class="stat-box">
+                <span class="stat-number" id="stat-ingredients">10</span>
+                <span class="stat-label">INGREDIENTS</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" id="stat-minutes">25</span>
+                <span class="stat-label">MINUTES</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" id="stat-servings">2–3</span>
+                <span class="stat-label">SERVINGS</span>
+              </div>
+            </div>
+          </div>
+          <div class="method-desc-col">
+            <p class="method-lead-desc" id="method-desc">
+              Bright, savory, and forgiving. Warm spice and lemon make this one-pan meal work hard on a weeknight.
+            </p>
+          </div>
+        </div>
+
+        <div class="method-horizontal-divider"></div>
+
+        <!-- Recipe Columns: Gather & Do this -->
+        <div class="method-content-grid">
+          
+          <!-- Column 1: Gather -->
+          <div class="method-col gather-col">
+            <div class="col-header-row">
+              <h3 class="col-title">Gather</h3>
+              <span class="col-sub">REQUIRED + OPTIONAL</span>
+            </div>
+            <div class="col-black-bar"></div>
+
+            <div class="ingredients-list" id="gather-list">
+              <!-- Rendered via JS -->
+            </div>
+
+            <div class="gather-footnote">
+              <span class="footnote-badge">❶</span>
+              <span class="footnote-text">Optional ingredients add lift, but the method works beautifully without them.</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Do this -->
+          <div class="method-col steps-col">
+            <div class="col-header-row">
+              <h3 class="col-title">Do this</h3>
+              <span class="col-sub">KEEP THE HEAT MOVING</span>
+            </div>
+            <div class="col-black-bar"></div>
+
+            <div class="steps-list" id="steps-list">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Camera Modal -->
+  <div class="camera-modal-backdrop" id="camera-modal" aria-hidden="true">
+    <div class="camera-modal-dialog">
+      <div class="camera-modal-header">
+        <span class="modal-title">CAPTURE FOOD INGREDIENTS</span>
+        <button type="button" class="close-modal-btn" id="close-camera-btn">✕</button>
+      </div>
+      <div class="camera-video-container">
+        <video id="camera-video" autoplay playsinline></video>
+        <canvas id="camera-canvas" class="visually-hidden"></canvas>
+        <div class="camera-reticle">
+          <div class="reticle-corner tl"></div>
+          <div class="reticle-corner tr"></div>
+          <div class="reticle-corner bl"></div>
+          <div class="reticle-corner br"></div>
+        </div>
+      </div>
+      <div class="camera-modal-actions">
+        <button type="button" id="snap-photo-btn" class="snap-btn">
+          <span class="snap-inner-dot"></span>
+        </button>
+        <p class="camera-hint">Position ingredients or dish within the frame and capture</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <strong>Recipe</strong> Methods
+      </div>
+      <div class="footer-center">
+        Good food starts with a useful first move.
+      </div>
+      <div class="footer-right">
+        RM / 2024–25
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

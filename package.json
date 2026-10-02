@@ -1,0 +1,12 @@
+{
+  "name": "recipe-methods",
+  "version": "1.0.0",
+  "description": "RecipeMethods — Kitchen Companion. A method, not a guess.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["recipe", "cooking", "gemini-api", "kitchen-companion"],
+  "author": "",
+  "license": "ISC"
+}
