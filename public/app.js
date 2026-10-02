@@ -161,8 +161,62 @@ const CANONICAL_RECIPES = {
         text: "Toss pasta directly in the pan with cheese and black pepper, swirling rapidly off heat until cheese melts completely into a silky sheen."
       }
     ]
+  },
+
+  "classic fettuccine alfredo": {
+    title: "Classic Fettuccine Alfredo",
+    description: "Rich, velvety, and pure Roman simplicity. Emulsified Parmigiano-Reggiano and butter create an intensely glossy sauce clinging to each ribbon.",
+    confidence: "HIGH",
+    ingredientsCount: 6,
+    minutes: 20,
+    servings: "2–3",
+    panType: "SKILLET",
+    difficulty: "EASY",
+    chips: [
+      { name: "fettuccine", type: "gold" },
+      { name: "parmigiano", type: "gold" },
+      { name: "butter", type: "gold" },
+      { name: "pasta water", type: "gold" },
+      { name: "black pepper", type: "gold" },
+      { name: "nutmeg", type: "outline" }
+    ],
+    gather: [
+      { name: "fresh egg fettuccine", qty: "300 g", checked: true, optional: false },
+      { name: "aged Parmigiano-Reggiano, microplaned", qty: "1½ cups / 120 g", checked: true, optional: false },
+      { name: "unsalted European butter", qty: "6 tbsp / 85 g", checked: true, optional: false },
+      { name: "reserved starchy pasta cooking water", qty: "¾ cup", checked: true, optional: false },
+      { name: "freshly cracked coarse black pepper", qty: "1 tsp", checked: true, optional: false },
+      { name: "freshly grated nutmeg", qty: "a pinch", checked: false, optional: true },
+      { name: "sea salt for boiling water", qty: "2 tbsp", checked: true, optional: false }
+    ],
+    steps: [
+      {
+        num: "01",
+        title: "Cook the fettuccine",
+        text: "Drop pasta into a pot of heavily salted rolling boiling water. Cook until just 1 minute before al dente; reserve ¾ cup of cloudy pasta cooking water."
+      },
+      {
+        num: "02",
+        title: "Melt the base",
+        text: "In a wide warm skillet over lowest heat, melt butter with 3 tablespoons of hot pasta water until a gentle milky emulsion begins."
+      },
+      {
+        num: "03",
+        title: "Toss and emulsify",
+        text: "Transfer drained fettuccine straight into the butter. Remove from heat immediately, sprinkle cheese in gradual handfuls, swirling vigorously as the cheese and water fuse into silk."
+      },
+      {
+        num: "04",
+        title: "Season and serve",
+        text: "Splash more pasta water if needed to maintain a glossy coat. Finish with cracked black pepper and a whisper of nutmeg; serve instantly on warm plates."
+      }
+    ]
   }
 };
+
+CANONICAL_RECIPES["fettuccine alfredo"] = CANONICAL_RECIPES["classic fettuccine alfredo"];
+CANONICAL_RECIPES["fettuccine"] = CANONICAL_RECIPES["classic fettuccine alfredo"];
+CANONICAL_RECIPES["alfredo"] = CANONICAL_RECIPES["classic fettuccine alfredo"];
 
 // Application State: Starts in 'initial' state (Waiting on your clue)
 let currentState = "initial"; 
@@ -221,6 +275,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function bindEvents() {
+  // Form submission (handles Enter key across all devices and browsers)
+  const recipeForm = document.getElementById("recipe-form");
+  if (recipeForm) {
+    recipeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      triggerAnalysis();
+    });
+  }
+
   // Clear dish button
   clearDishBtn.addEventListener("click", () => {
     dishInput.value = "";
@@ -239,13 +302,14 @@ function bindEvents() {
   });
 
   // Submit / Action button
-  submitBtn.addEventListener("click", () => {
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     triggerAnalysis();
   });
 
   // Enter key inside dish input
   dishInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" || e.keyCode === 13 || e.which === 13) {
       e.preventDefault();
       triggerAnalysis();
     }
@@ -306,6 +370,8 @@ function setAppState(state) {
     visualTagText.textContent = "HOUSE METHOD · READY";
     btnText.textContent = "Analyze again";
   }
+}
+
 // Curated Food Photography Dictionary for Small Window
 const DISH_PHOTO_MAP = [
   { match: ["fettuccine", "alfredo", "carbonara"], url: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=900&q=80" },
@@ -457,11 +523,14 @@ async function triggerAnalysis() {
   if (bannerVisual) bannerVisual.classList.add("is-analyzing");
 
   try {
-    // Check canonical matches first (Golden chickpea skillet, Shakshuka, Pasta)
-    if (!uploadedImageBase64 && CANONICAL_RECIPES[query]) {
+    // Check canonical matches first (Golden chickpea skillet, Shakshuka, Pasta, Fettuccine Alfredo, etc.)
+    const matchedKey = Object.keys(CANONICAL_RECIPES).find(k => 
+      query === k || query.includes(k) || k.includes(query)
+    );
+    if (!uploadedImageBase64 && matchedKey) {
       // Realistic brief culinary scanning delay
-      await new Promise(resolve => setTimeout(resolve, 750));
-      activeRecipe = CANONICAL_RECIPES[query];
+      await new Promise(resolve => setTimeout(resolve, 600));
+      activeRecipe = CANONICAL_RECIPES[matchedKey];
       renderRecipe(activeRecipe);
       setAppState("analyzed");
       smoothScrollToMethod();
