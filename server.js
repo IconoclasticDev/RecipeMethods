@@ -5,6 +5,8 @@
 
 const http = require("http");
 const fs = require("fs");
+const path = require("path");
+
 // Automatically parse .env file if present
 const envPath = path.join(__dirname, ".env");
 if (fs.existsSync(envPath)) {
