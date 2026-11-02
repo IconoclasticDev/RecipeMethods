@@ -273,6 +273,14 @@ document.addEventListener("DOMContentLoaded", () => {
   renderRecipe(activeRecipe);
   setAppState("initial");
   bindEvents();
+
+  // Support direct deep-link or preview query parameter (?dish=...)
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramDish = urlParams.get("dish");
+  if (paramDish) {
+    dishInput.value = paramDish;
+    triggerAnalysis();
+  }
 });
 
 function bindEvents() {
