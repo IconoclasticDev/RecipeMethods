@@ -593,9 +593,24 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  display: none;
   z-index: 1;
-  animation: fadeInImage 0.5s ease-out forwards;
+  animation: fadeInImage 0.4s ease-out forwards;
+}
+
+/* State-driven display for left visual banner */
+body.state-initial #wood-board {
+  display: flex !important;
+}
+body.state-initial #visual-recipe-img {
+  display: none !important;
+}
+
+body.state-analyzed #wood-board {
+  display: none !important;
+}
+body.state-analyzed #visual-recipe-img {
+  display: block !important;
 }
 
 @keyframes fadeInImage {

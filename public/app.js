@@ -165,50 +165,51 @@ const CANONICAL_RECIPES = {
 
   "classic fettuccine alfredo": {
     title: "Classic Fettuccine Alfredo",
-    description: "Rich, velvety, and pure Roman simplicity. Emulsified Parmigiano-Reggiano and butter create an intensely glossy sauce clinging to each ribbon.",
+    description: "Silky ribbons of pasta coated in an emulsified mantle of sweet butter, rich cream, and nutty Parmigiano-Reggiano, delivering decadent Italian comfort in twenty minutes.",
     confidence: "HIGH",
     ingredientsCount: 6,
     minutes: 20,
     servings: "2–3",
-    panType: "SKILLET",
+    panType: "LARGE SKILLET",
     difficulty: "EASY",
     chips: [
       { name: "fettuccine", type: "gold" },
-      { name: "parmigiano", type: "gold" },
-      { name: "butter", type: "gold" },
-      { name: "pasta water", type: "gold" },
-      { name: "black pepper", type: "gold" },
-      { name: "nutmeg", type: "outline" }
+      { name: "parmigiano-reggiano", type: "gold" },
+      { name: "unsalted butter", type: "gold" },
+      { name: "heavy cream", type: "gold" },
+      { name: "fresh parsley", type: "outline" },
+      { name: "freshly cracked pepper", type: "outline" }
     ],
     gather: [
-      { name: "fresh egg fettuccine", qty: "300 g", checked: true, optional: false },
-      { name: "aged Parmigiano-Reggiano, microplaned", qty: "1½ cups / 120 g", checked: true, optional: false },
-      { name: "unsalted European butter", qty: "6 tbsp / 85 g", checked: true, optional: false },
-      { name: "reserved starchy pasta cooking water", qty: "¾ cup", checked: true, optional: false },
-      { name: "freshly cracked coarse black pepper", qty: "1 tsp", checked: true, optional: false },
-      { name: "freshly grated nutmeg", qty: "a pinch", checked: false, optional: true },
-      { name: "sea salt for boiling water", qty: "2 tbsp", checked: true, optional: false }
+      { name: "fresh fettuccine ribbons", qty: "300 g", checked: true, optional: false },
+      { name: "aged Parmigiano-Reggiano, finely grated", qty: "1½ cups / 120 g", checked: true, optional: false },
+      { name: "unsalted sweet butter", qty: "6 tbsp / 85 g", checked: true, optional: false },
+      { name: "heavy whipping cream", qty: "½ cup / 120 ml", checked: true, optional: false },
+      { name: "starchy pasta cooking water", qty: "½ cup", checked: true, optional: false },
+      { name: "fresh flat-leaf parsley, chopped", qty: "2 tbsp", checked: false, optional: true },
+      { name: "freshly cracked black pepper", qty: "1 tsp", checked: false, optional: true },
+      { name: "kosher salt for pasta water", qty: "2 tbsp", checked: true, optional: false }
     ],
     steps: [
       {
         num: "01",
-        title: "Cook the fettuccine",
-        text: "Drop pasta into a pot of heavily salted rolling boiling water. Cook until just 1 minute before al dente; reserve ¾ cup of cloudy pasta cooking water."
+        title: "Boil the fettuccine",
+        text: "Drop fresh fettuccine into rolling, heavily salted water. Cook until just 1 minute before al dente; reserve ½ cup of cloudy pasta cooking water."
       },
       {
         num: "02",
-        title: "Melt the base",
-        text: "In a wide warm skillet over lowest heat, melt butter with 3 tablespoons of hot pasta water until a gentle milky emulsion begins."
+        title: "Warm butter and cream",
+        text: "In a wide large skillet over medium-low heat, melt sweet butter into heavy cream with 3 tablespoons of hot pasta water until gently shimmering."
       },
       {
         num: "03",
         title: "Toss and emulsify",
-        text: "Transfer drained fettuccine straight into the butter. Remove from heat immediately, sprinkle cheese in gradual handfuls, swirling vigorously as the cheese and water fuse into silk."
+        text: "Transfer drained fettuccine straight into the skillet. Remove from heat immediately, sprinkle cheese in gradual handfuls, swirling vigorously as the cheese and cream fuse into silk."
       },
       {
         num: "04",
         title: "Season and serve",
-        text: "Splash more pasta water if needed to maintain a glossy coat. Finish with cracked black pepper and a whisper of nutmeg; serve instantly on warm plates."
+        text: "Splash more pasta water if needed to maintain a glossy coat. Finish with cracked black pepper and chopped parsley; serve instantly on warm plates."
       }
     ]
   }
@@ -355,7 +356,7 @@ function bindEvents() {
 }
 
 // Switch UI State between Initial (Clue wait) and Analyzed (Method revealed)
-function setAppState(state) {
+function setAppState(state, dishName) {
   currentState = state;
   if (state === "initial") {
     bodyEl.classList.remove("state-analyzed");
@@ -363,34 +364,38 @@ function setAppState(state) {
     readHeading.textContent = "See what comes next.";
     visualTagText.textContent = "A USEFUL FIRST MOVE";
     btnText.textContent = "Reveal the recipe";
+    // Bring image back to default wood board vector
+    updateSmallWindowImage("");
   } else {
     bodyEl.classList.remove("state-initial");
     bodyEl.classList.add("state-analyzed");
     readHeading.textContent = "A method, not a guess.";
     visualTagText.textContent = "HOUSE METHOD · READY";
     btnText.textContent = "Analyze again";
+    // Show the dish photo on the left side of the text!
+    updateSmallWindowImage(dishName || activeRecipe?.title || dishInput.value);
   }
 }
 
 // Curated Food Photography Dictionary for Small Window
 const DISH_PHOTO_MAP = [
-  { match: ["fettuccine", "alfredo", "carbonara"], url: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=900&q=80" },
-  { match: ["shakshuka", "shakshouka", "egg", "eggs"], url: "https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=900&q=80" },
-  { match: ["garlic pasta", "spaghetti", "pasta", "noodles", "linguine"], url: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80" },
-  { match: ["salmon", "fish", "trout", "fillet"], url: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80" },
-  { match: ["shrimp", "prawn", "seafood", "lobster"], url: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=900&q=80" },
-  { match: ["chickpea", "skillet", "hummus"], url: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=80" },
-  { match: ["tofu", "vegan", "vegetarian"], url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80" },
-  { match: ["curry", "tikka", "masala"], url: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=80" },
-  { match: ["pizza", "flatbread", "focaccia"], url: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80" },
-  { match: ["burger", "sandwich", "patty"], url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80" },
-  { match: ["taco", "fajita", "burrito", "quesadilla"], url: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=900&q=80" },
-  { match: ["salad", "greens", "caesar"], url: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80" },
-  { match: ["soup", "stew", "chowder", "broth"], url: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80" },
+  { match: ["fettuccine", "alfredo", "carbonara", "cream pasta"], url: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=900&q=80" },
+  { match: ["chickpea", "golden chickpea", "chickpea skillet", "hummus"], url: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=80" },
+  { match: ["shakshuka", "shakshouka", "egg", "eggs", "poached egg"], url: "https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=900&q=80" },
+  { match: ["garlic pasta", "spaghetti", "pasta", "noodles", "linguine", "penne", "rigatoni", "lasagna", "bolognese"], url: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80" },
+  { match: ["salmon", "fish", "trout", "fillet", "cod", "sea bass"], url: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80" },
+  { match: ["shrimp", "prawn", "seafood", "lobster", "crab"], url: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=900&q=80" },
+  { match: ["tofu", "vegan", "vegetarian", "bowl"], url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80" },
+  { match: ["curry", "tikka", "masala", "butter chicken", "paneer", "korma"], url: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=80" },
+  { match: ["pizza", "flatbread", "focaccia", "margherita"], url: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80" },
+  { match: ["burger", "sandwich", "patty", "cheeseburger"], url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80" },
+  { match: ["taco", "fajita", "burrito", "quesadilla", "mexican"], url: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=900&q=80" },
+  { match: ["salad", "greens", "caesar", "avocado"], url: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80" },
+  { match: ["soup", "stew", "chowder", "broth", "ramen", "pho"], url: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80" },
   { match: ["rice", "risotto", "biryani", "fried rice", "paella"], url: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=900&q=80" },
-  { match: ["steak", "beef", "meat", "ribeye"], url: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=900&q=80" },
+  { match: ["steak", "beef", "meat", "ribeye", "roast"], url: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=900&q=80" },
   { match: ["chicken", "wings", "roast chicken"], url: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=900&q=80" },
-  { match: ["cake", "dessert", "cookie", "pie", "chocolate"], url: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80" }
+  { match: ["cake", "dessert", "cookie", "pie", "chocolate", "pancake"], url: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80" }
 ];
 
 function getDishPhoto(dishName) {
@@ -413,20 +418,17 @@ function updateSmallWindowImage(dishName) {
 
   if (currentState === "initial") {
     visualRecipeImg.style.display = "none";
+    visualRecipeImg.src = "";
     woodBoard.style.display = "flex";
     return;
   }
 
-  const photo = getDishPhoto(dishName);
-  if (photo) {
-    visualRecipeImg.src = photo;
-    visualRecipeImg.style.display = "block";
-    woodBoard.style.display = "none";
-  } else {
-    // If no specific photo match, keep the elegant wood board vector
-    visualRecipeImg.style.display = "none";
-    woodBoard.style.display = "flex";
-  }
+  // Analyzed state: ALWAYS show a real, gorgeous food photo on the left of the text!
+  const photo = getDishPhoto(dishName) || "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80";
+  visualRecipeImg.src = photo;
+  visualRecipeImg.alt = dishName || "Recipe visual";
+  visualRecipeImg.style.display = "block";
+  woodBoard.style.display = "none";
 }
 
 // Render Recipe Data into the UI
