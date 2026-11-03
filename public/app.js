@@ -438,7 +438,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const paramDish = urlParams.get("dish");
   if (paramDish) {
     dishInput.value = paramDish;
-    triggerAnalysis();
+    triggerAnalysis(true);
   }
 });
 
@@ -774,7 +774,7 @@ function renderRecipe(recipe) {
 }
 
 // Trigger Analysis: Analyzes first, then reveals the recipe!
-async function triggerAnalysis() {
+async function triggerAnalysis(immediate = false) {
   let query = dishInput.value.trim().toLowerCase();
 
   // If empty input and no photo, default to golden chickpea skillet
@@ -795,8 +795,10 @@ async function triggerAnalysis() {
       query === k || query.includes(k) || k.includes(query)
     );
     if (!uploadedImageBase64 && matchedKey) {
-      // Realistic brief culinary scanning delay
-      await new Promise(resolve => setTimeout(resolve, 600));
+      // Realistic brief culinary scanning delay unless immediate deep-link
+      if (!immediate) {
+        await new Promise(resolve => setTimeout(resolve, 600));
+      }
       activeRecipe = CANONICAL_RECIPES[matchedKey];
       setAppState("analyzed", activeRecipe.title);
       renderRecipe(activeRecipe);
