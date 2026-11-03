@@ -92,6 +92,47 @@
                   <p class="field-hint">A dish, a craving, or the last thing you bought.</p>
                 </div>
 
+                <!-- RECIPE OF THE DAY (CULINARY CALENDAR & SURPRISE ROTATION) -->
+                <div class="rotd-card" id="rotd-card">
+                  <div class="rotd-header">
+                    <div class="rotd-badge" id="rotd-badge">
+                      <span class="rotd-sparkle">✦</span>
+                      <span id="rotd-badge-text">TODAY'S SPECIAL · TACO TUESDAY</span>
+                    </div>
+                    <span class="rotd-date" id="rotd-date">Tuesday, Nov 3</span>
+                  </div>
+                  
+                  <div class="rotd-body">
+                    <div class="rotd-info">
+                      <h3 class="rotd-title" id="rotd-title">Crispy Street-Style Tacos</h3>
+                      <p class="rotd-reason" id="rotd-reason">
+                        Taco Tuesday Tradition · Charred tortillas, vibrant pico &amp; zesty lime.
+                      </p>
+                    </div>
+                    
+                    <div class="rotd-actions">
+                      <button type="button" id="rotd-cook-btn" class="rotd-cook-btn" aria-label="Cook this recipe today">
+                        <span>Cook today</span>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                          <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                      </button>
+                      <button type="button" id="rotd-shuffle-btn" class="rotd-shuffle-btn" title="Surprise me with a random recipe" aria-label="Surprise me with a random recipe">
+                        <svg class="shuffle-dice-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="3" ry="3"/>
+                          <circle cx="8" cy="8" r="1.2" fill="currentColor"/>
+                          <circle cx="16" cy="8" r="1.2" fill="currentColor"/>
+                          <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+                          <circle cx="8" cy="16" r="1.2" fill="currentColor"/>
+                          <circle cx="16" cy="16" r="1.2" fill="currentColor"/>
+                        </svg>
+                        <span>Surprise</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Quick Presets -->
                 <div class="quick-presets">
                   <span class="presets-label">TRY:</span>

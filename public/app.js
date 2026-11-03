@@ -697,12 +697,222 @@ const CANONICAL_RECIPES = {
         ]
       }
     }
+  },
+
+  "crispy street-style tacos": {
+    title: "Crispy Street-Style Tacos",
+    description: "Charred corn tortillas cradling seasoned crisp fillings, blistered scallions, and bright fresh pico with lime.",
+    confidence: "HIGH",
+    ingredientsCount: 8,
+    minutes: 20,
+    servings: "2–3",
+    panType: "CAST IRON SKILLET",
+    difficulty: "EASY",
+    chips: [
+      { name: "corn tortillas", type: "gold" },
+      { name: "fresh lime", type: "gold" },
+      { name: "cilantro", type: "gold" },
+      { name: "red onion", type: "gold" },
+      { name: "cumin & chili", type: "gold" },
+      { name: "queso fresco", type: "outline" }
+    ],
+    gather: [
+      { name: "white corn tortillas", qty: "6–8 small", checked: true, optional: false },
+      { name: "ripe plum tomatoes, finely diced", qty: "2 medium", checked: true, optional: false },
+      { name: "red onion, finely diced", qty: "½ small", checked: true, optional: false },
+      { name: "fresh cilantro leaves, chopped", qty: "½ cup", checked: true, optional: false },
+      { name: "fresh limes, cut into wedges", qty: "2 whole", checked: true, optional: false },
+      { name: "ground cumin & ancho chili", qty: "1 tsp each", checked: true, optional: false },
+      { name: "crumbled queso fresco or cotija", qty: "½ cup / 60 g", checked: false, optional: true },
+      { name: "flaky sea salt", qty: "to taste", checked: true, optional: false }
+    ],
+    steps: [
+      {
+        num: "01",
+        title: "Mix the pico de gallo",
+        text: "Toss diced tomatoes, minced red onion, cilantro, fresh lime juice, and a pinch of salt in a small bowl. Let the flavors marry at room temperature for 10 minutes."
+      },
+      {
+        num: "02",
+        title: "Toast & char tortillas",
+        text: "Heat a dry cast-iron skillet over medium-high heat. Warm tortillas for 30–45 seconds per side until lightly blistered, flexible, and fragrant. Wrap in a clean kitchen towel."
+      },
+      {
+        num: "03",
+        title: "Sear the savory filling",
+        text: "In the same hot pan, quickly sear black beans, mushrooms, or spiced protein with cumin, ancho chili, and a splash of olive oil until sizzling and fragrant, 3–4 minutes."
+      },
+      {
+        num: "04",
+        title: "Assemble with vibrant finish",
+        text: "Layer warm double tortillas, spoon the hot savory filling, crown with cool pico de gallo, crumbled queso, and a generous squeeze of fresh lime juice."
+      }
+    ]
+  },
+
+  "artisan skillet margherita pizza": {
+    title: "Artisan Skillet Margherita Pizza",
+    description: "High-heat stovetop-to-broiler skillet pizza boasting a blistered, leopard-spotted crust, sweet San Marzano tomatoes, and melted fresh mozzarella.",
+    confidence: "HIGH",
+    ingredientsCount: 6,
+    minutes: 18,
+    servings: "2",
+    panType: "CAST IRON SKILLET",
+    difficulty: "MEDIUM",
+    chips: [
+      { name: "pizza dough", type: "gold" },
+      { name: "san marzano tomatoes", type: "gold" },
+      { name: "fresh mozzarella", type: "gold" },
+      { name: "fresh basil", type: "gold" },
+      { name: "extra virgin olive oil", type: "gold" },
+      { name: "sea salt", type: "outline" }
+    ],
+    gather: [
+      { name: "fermented pizza dough ball", qty: "250 g", checked: true, optional: false },
+      { name: "crushed San Marzano tomatoes", qty: "½ cup / 120 g", checked: true, optional: false },
+      { name: "fresh whole-milk mozzarella, torn", qty: "125 g", checked: true, optional: false },
+      { name: "fresh sweet basil leaves", qty: "6–8 leaves", checked: true, optional: false },
+      { name: "extra virgin olive oil", qty: "2 tbsp", checked: true, optional: false },
+      { name: "flaky sea salt", qty: "to taste", checked: true, optional: false }
+    ],
+    steps: [
+      {
+        num: "01",
+        title: "Preheat pan & stretch dough",
+        text: "Set oven broiler to high. Heat a heavy cast-iron skillet over high heat on the stovetop. Stretch room-temperature dough into a 10-inch circle on parchment or oiled board."
+      },
+      {
+        num: "02",
+        title: "Sear the bottom crust",
+        text: "Carefully lay dough into the dry, smoking hot skillet. Cook for 2 minutes until underside develops deep golden blisters and leopard spots."
+      },
+      {
+        num: "03",
+        title: "Dress with speed",
+        text: "Working quickly, spoon crushed tomatoes across dough leaving a 1-inch border. Scatter torn mozzarella and drizzle with olive oil."
+      },
+      {
+        num: "04",
+        title: "Broil to blister & melt",
+        text: "Transfer skillet directly beneath the oven broiler for 3–4 minutes until cheese bubbles and crust puffs with charred blisters. Scatter fresh basil and slice immediately."
+      }
+    ]
+  },
+
+  "crispy pan-seared salmon": {
+    title: "Crispy Pan-Seared Salmon",
+    description: "Restaurant-grade golden crackling skin and a buttery, tender center basted with browned butter, garlic, fresh thyme, and lemon.",
+    confidence: "HIGH",
+    ingredientsCount: 6,
+    minutes: 15,
+    servings: "2",
+    panType: "STAINLESS STEEL SKILLET",
+    difficulty: "EASY",
+    chips: [
+      { name: "salmon fillets", type: "gold" },
+      { name: "butter", type: "gold" },
+      { name: "fresh thyme", type: "gold" },
+      { name: "fresh lemon", type: "gold" },
+      { name: "garlic cloves", type: "gold" },
+      { name: "sea salt", type: "outline" }
+    ],
+    gather: [
+      { name: "skin-on salmon fillets, center-cut", qty: "2 fillets (180g ea)", checked: true, optional: false },
+      { name: "unsalted butter", qty: "2 tbsp / 30 g", checked: true, optional: false },
+      { name: "fresh thyme sprigs", qty: "3 sprigs", checked: true, optional: false },
+      { name: "garlic, lightly crushed", qty: "2 cloves", checked: true, optional: false },
+      { name: "lemon, halved", qty: "1 whole", checked: true, optional: false },
+      { name: "flaky sea salt & black pepper", qty: "to taste", checked: true, optional: false }
+    ],
+    steps: [
+      {
+        num: "01",
+        title: "Dry and season skin",
+        text: "Thoroughly pat salmon skin dry with paper towels until completely matte. Season liberally with fine sea salt; dry skin is the single secret to glass-like crispness."
+      },
+      {
+        num: "02",
+        title: "Press in hot oil",
+        text: "Heat oil in a stainless skillet over medium-high until shimmering. Place salmon skin-side down; press firmly with a spatula for 15 seconds to prevent curling."
+      },
+      {
+        num: "03",
+        title: "Cook 90% on skin side",
+        text: "Leave untouched over medium heat for 6–7 minutes until skin is deeply golden and flesh turns opaque almost all the way through."
+      },
+      {
+        num: "04",
+        title: "Aromatics baste & kiss",
+        text: "Flip gently. Add butter, crushed garlic, and thyme. Tilt the pan and spoon foaming aromatic butter over fillets for 45 seconds. Finish with fresh lemon juice."
+      }
+    ]
+  },
+
+  "creamy wild mushroom risotto": {
+    title: "Creamy Wild Mushroom Risotto",
+    description: "Velvety carnaroli rice slowly coaxed with warm stock, golden caramelized wild mushrooms, white wine, and aged Parmigiano.",
+    confidence: "HIGH",
+    ingredientsCount: 8,
+    minutes: 30,
+    servings: "3–4",
+    panType: "WIDE DEEP SKILLET",
+    difficulty: "MEDIUM",
+    chips: [
+      { name: "carnaroli or arborio rice", type: "gold" },
+      { name: "mixed wild mushrooms", type: "gold" },
+      { name: "dry white wine", type: "gold" },
+      { name: "shallot", type: "gold" },
+      { name: "parmigiano-reggiano", type: "gold" },
+      { name: "fresh thyme", type: "outline" }
+    ],
+    gather: [
+      { name: "Carnaroli or Arborio rice", qty: "1½ cups / 300 g", checked: true, optional: false },
+      { name: "cremini & shiitake mushrooms, sliced", qty: "300 g", checked: true, optional: false },
+      { name: "dry white wine or vermouth", qty: "½ cup / 120 ml", checked: true, optional: false },
+      { name: "warm vegetable or chicken stock", qty: "4–5 cups", checked: true, optional: false },
+      { name: "shallot, finely minced", qty: "1 large", checked: true, optional: false },
+      { name: "unsalted butter", qty: "3 tbsp / 45 g", checked: true, optional: false },
+      { name: "aged Parmigiano-Reggiano, grated", qty: "½ cup / 50 g", checked: true, optional: false },
+      { name: "fresh thyme leaves", qty: "1 tbsp", checked: false, optional: true }
+    ],
+    steps: [
+      {
+        num: "01",
+        title: "Caramelize mushrooms",
+        text: "Sear sliced mushrooms in a wide skillet over high heat with 1 tbsp butter until deep golden brown and fragrant, 5–6 minutes. Transfer half to a plate for garnish."
+      },
+      {
+        num: "02",
+        title: "Toast the rice (Tostatura)",
+        text: "Add minced shallot and remaining butter to pan. Tip in rice and toast over medium heat for 2 minutes until grains are translucent at the edges and smell nutty."
+      },
+      {
+        num: "03",
+        title: "Deglaze & ladle stock",
+        text: "Pour in white wine; let it hiss and absorb completely. Begin adding warm stock 1 ladle at a time, stirring gently as the rice releases its silky starches, 18 minutes."
+      },
+      {
+        num: "04",
+        title: "Mantecatura finish",
+        text: "Remove from heat when rice is tender-firm. Beat vigorously with cold butter, Parmigiano, and fresh thyme until wavy and glossy ('all'onda'). Crown with reserved seared mushrooms."
+      }
+    ]
   }
 };
 
 CANONICAL_RECIPES["fettuccine alfredo"] = CANONICAL_RECIPES["classic fettuccine alfredo"];
 CANONICAL_RECIPES["fettuccine"] = CANONICAL_RECIPES["classic fettuccine alfredo"];
 CANONICAL_RECIPES["alfredo"] = CANONICAL_RECIPES["classic fettuccine alfredo"];
+CANONICAL_RECIPES["taco"] = CANONICAL_RECIPES["crispy street-style tacos"];
+CANONICAL_RECIPES["tacos"] = CANONICAL_RECIPES["crispy street-style tacos"];
+CANONICAL_RECIPES["street tacos"] = CANONICAL_RECIPES["crispy street-style tacos"];
+CANONICAL_RECIPES["pizza"] = CANONICAL_RECIPES["artisan skillet margherita pizza"];
+CANONICAL_RECIPES["margherita"] = CANONICAL_RECIPES["artisan skillet margherita pizza"];
+CANONICAL_RECIPES["margherita pizza"] = CANONICAL_RECIPES["artisan skillet margherita pizza"];
+CANONICAL_RECIPES["salmon"] = CANONICAL_RECIPES["crispy pan-seared salmon"];
+CANONICAL_RECIPES["pan-seared salmon"] = CANONICAL_RECIPES["crispy pan-seared salmon"];
+CANONICAL_RECIPES["risotto"] = CANONICAL_RECIPES["creamy wild mushroom risotto"];
+CANONICAL_RECIPES["mushroom risotto"] = CANONICAL_RECIPES["creamy wild mushroom risotto"];
 
 // Dietary Preference Variations Configuration
 const DIET_CONFIG = {
@@ -737,6 +947,301 @@ const DIET_CONFIG = {
     toast: "Adapted to Gluten-Free Version: zero wheat, barley, or rye."
   }
 };
+
+// ==========================================================================
+// Culinary Calendar & Recipe of the Day System
+// ==========================================================================
+const CULINARY_CALENDAR = {
+  // Special Annual Calendar Dates (MM-DD)
+  dates: {
+    "01-01": {
+      dish: "golden chickpea skillet",
+      title: "Black-Eyed Pea & Greens Skillet",
+      badge: "🎉 NEW YEAR'S TRADITION",
+      reason: "New Year Hearth · Symbolic golden legumes & tender greens for good fortune and vitality."
+    },
+    "01-17": {
+      dish: "artisan skillet margherita pizza",
+      title: "Artisan Skillet Margherita Pizza",
+      badge: "🍕 WORLD PIZZA DAY",
+      reason: "World Pizza Day (Sant'Antonio Abate) · Honoring the Italian craft of blistered crust, sweet San Marzano & basil."
+    },
+    "02-09": {
+      dish: "artisan skillet margherita pizza",
+      title: "Artisan Skillet Margherita Pizza",
+      badge: "🍕 NATIONAL PIZZA DAY",
+      reason: "National Pizza Day · High-heat skillet sear, fragrant basil, sweet tomato and bubbling mozzarella."
+    },
+    "02-14": {
+      dish: "classic fettuccine alfredo",
+      title: "Classic Fettuccine Alfredo",
+      badge: "❤️ VALENTINE'S ROMANCE",
+      reason: "Valentine's Italian Feast · Silky mantecatura emulsion of golden butter & aged Parmigiano-Reggiano."
+    },
+    "03-14": {
+      dish: "golden chickpea skillet",
+      title: "Savory Vegetable Pot Pie Skillet",
+      badge: "🥧 PI DAY (3.14)",
+      reason: "Pi Day Culinary Celebration · Flaky golden crust over fragrant aromatics and simmered vegetables."
+    },
+    "03-17": {
+      dish: "golden chickpea skillet",
+      title: "Irish Colcannon & Leek Skillet",
+      badge: "☘️ ST. PATRICK'S DAY",
+      reason: "St. Patrick's Celebration · Velvet braised potatoes, cabbage, sweet leeks & browned butter."
+    },
+    "05-05": {
+      dish: "crispy street-style tacos",
+      title: "Crispy Street-Style Tacos",
+      badge: "🌮 CINCO DE MAYO",
+      reason: "Cinco de Mayo Fiesta · Warm charred tortillas, smoky toasted cumin, fresh pico and zesty lime."
+    },
+    "10-25": {
+      dish: "classic fettuccine alfredo",
+      title: "Classic Fettuccine Alfredo",
+      badge: "🍝 WORLD PASTA DAY",
+      reason: "World Pasta Day · Celebrating centuries of hand-crafted pasta and the pure mastery of starchy water emulsion."
+    },
+    "10-31": {
+      dish: "creamy wild mushroom risotto",
+      title: "Roasted Harvest Mushroom Risotto",
+      badge: "🎃 HALLOWEEN HARVEST",
+      reason: "Autumn Hearth Special · Earthy caramelized mushrooms, fragrant sage and comforting velvety rice."
+    },
+    "11-03": {
+      dish: "crispy street-style tacos",
+      title: "Crispy Street-Style Tacos",
+      badge: "🌮 TACO TUESDAY & WORLD SANDWICH DAY",
+      reason: "Culinary Calendar Special · Blistered warm tortillas, lively fresh pico de gallo & fragrant lime."
+    },
+    "11-26": {
+      dish: "golden chickpea skillet",
+      title: "Cast-Iron Herb-Roasted Autumn Medley",
+      badge: "🦃 THANKSGIVING HARVEST",
+      reason: "Thanksgiving Kitchen Hearth · Golden roasted roots, fragrant rosemary & maple cider glaze."
+    },
+    "12-24": {
+      dish: "crispy pan-seared salmon",
+      title: "Crispy Pan-Seared Salmon",
+      badge: "🐟 CHRISTMAS EVE FEAST",
+      reason: "Feast of the Seven Fishes Tradition · Crackling golden skin basted in aromatic lemon-thyme butter."
+    },
+    "12-31": {
+      dish: "classic fettuccine alfredo",
+      title: "Classic Fettuccine Alfredo",
+      badge: "✨ NEW YEAR'S EVE GALA",
+      reason: "New Year's Eve Kitchen Celebration · Rich, velvety Parmigiano silk to ring in the celebration."
+    }
+  },
+
+  // Weekday Traditions (Day 0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+  weekdays: [
+    {
+      day: 0,
+      name: "Sunday",
+      dish: "classic fettuccine alfredo",
+      title: "Classic Fettuccine Alfredo",
+      badge: "🍝 SUNDAY RITUAL",
+      reason: "Sunday Italian Tradition · Gathering around the table with slow emulsion and velvety Parmigiano comfort."
+    },
+    {
+      day: 1,
+      name: "Monday",
+      dish: "golden chickpea skillet",
+      title: "Golden Chickpea Skillet",
+      badge: "🌱 MEATLESS MONDAY",
+      reason: "Global Meatless Monday · Forgiving plant protein, warm bloomed turmeric and bright fresh lemon."
+    },
+    {
+      day: 2,
+      name: "Tuesday",
+      dish: "crispy street-style tacos",
+      title: "Crispy Street-Style Tacos",
+      badge: "🌮 TACO TUESDAY",
+      reason: "Taco Tuesday Tradition · Charred tortillas, vibrant pico de gallo, smoky spices & fresh lime."
+    },
+    {
+      day: 3,
+      name: "Wednesday",
+      dish: "rustic tomato shakshuka",
+      title: "Rustic Tomato Shakshuka",
+      badge: "🍳 MIDWEEK COMFORT",
+      reason: "Midweek Hearth Reset · Gently poached eggs nestled in spiced, slow-simmered pepper tomato gravy."
+    },
+    {
+      day: 4,
+      name: "Thursday",
+      dish: "creamy garlic pasta",
+      title: "Creamy Garlic Butter Pasta",
+      badge: "🧄 THURSDAY CRAVING",
+      reason: "15-Minute Skillet Magic · Toasted sweet garlic, cracked black pepper and velvety gloss."
+    },
+    {
+      day: 5,
+      name: "Friday",
+      dish: "crispy pan-seared salmon",
+      title: "Crispy Pan-Seared Salmon",
+      badge: "🐟 FRIDAY SPECIAL",
+      reason: "Friday Catch Tradition · Blistered crackling skin, lemon herb butter and tender flaky center."
+    },
+    {
+      day: 6,
+      name: "Saturday",
+      dish: "artisan skillet margherita pizza",
+      title: "Artisan Skillet Margherita Pizza",
+      badge: "🍕 SATURDAY PROJECT",
+      reason: "Weekend Kitchen Craft · High-heat blistered crust, fragrant basil and bubbling melted mozzarella."
+    }
+  ],
+
+  // Rotation vault for random rolls and surprise exploration
+  vault: [
+    {
+      dish: "crispy street-style tacos",
+      title: "Crispy Street-Style Tacos",
+      badge: "🌮 CHEF'S ROTATION",
+      reason: "Charred street-style tortillas, fiery salsa fresca & bright citrus zest."
+    },
+    {
+      dish: "golden chickpea skillet",
+      title: "Golden Chickpea Skillet",
+      badge: "✨ ONE-PAN MASTERCLASS",
+      reason: "Forgiving weeknight hero · Nutty chickpeas, sweet slumped tomatoes & turmeric gold."
+    },
+    {
+      dish: "classic fettuccine alfredo",
+      title: "Classic Fettuccine Alfredo",
+      badge: "🍝 ROMAN EMULSION",
+      reason: "Pure Italian physics · Glossy mantle of churned butter & 24-month aged Parmigiano."
+    },
+    {
+      dish: "rustic tomato shakshuka",
+      title: "Rustic Tomato Shakshuka",
+      badge: "🍳 NORTH AFRICAN HEARTH",
+      reason: "Silk yolks, charred sweet bell peppers, toasted cumin & warm pita."
+    },
+    {
+      dish: "creamy garlic pasta",
+      title: "Creamy Garlic Butter Pasta",
+      badge: "🧄 FAST COMFORT",
+      reason: "Gently caramelized sliced garlic, peppery parsley & silky reduction in 15 minutes."
+    },
+    {
+      dish: "artisan skillet margherita pizza",
+      title: "Artisan Skillet Margherita Pizza",
+      badge: "🍕 CAST-IRON CRAFT",
+      reason: "Neapolitan leopard spotting achieved without a wood-fired oven."
+    },
+    {
+      dish: "crispy pan-seared salmon",
+      title: "Crispy Pan-Seared Salmon",
+      badge: "🐟 SEAFOOD PRECISION",
+      reason: "Shatteringly crisp skin, tender medium-rare flesh, and foaming lemon-thyme butter."
+    },
+    {
+      dish: "creamy wild mushroom risotto",
+      title: "Creamy Wild Mushroom Risotto",
+      badge: "🍄 ARBORIO RITUAL",
+      reason: "Slowly coaxed starches, browned wild cremini, dry white wine & herb finish."
+    }
+  ]
+};
+
+let currentRotdDish = null;
+
+function getRecipeOfTheDay(customDate) {
+  const d = customDate || new Date();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const mmdd = `${month}-${day}`;
+  const dayOfWeek = d.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+  // 1. Check Special Annual Calendar Dates first
+  if (CULINARY_CALENDAR.dates[mmdd]) {
+    return {
+      ...CULINARY_CALENDAR.dates[mmdd],
+      type: "special-date",
+      dateFormatted: d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })
+    };
+  }
+
+  // 2. Check Weekday Traditions
+  const weekdaySpecial = CULINARY_CALENDAR.weekdays.find(w => w.day === dayOfWeek);
+  if (weekdaySpecial) {
+    return {
+      ...weekdaySpecial,
+      type: "weekday",
+      dateFormatted: d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })
+    };
+  }
+
+  // 3. Fallback to vault item based on day of month
+  const vaultIndex = (d.getDate() + d.getMonth()) % CULINARY_CALENDAR.vault.length;
+  const vaultItem = CULINARY_CALENDAR.vault[vaultIndex];
+  return {
+    ...vaultItem,
+    type: "vault",
+    dateFormatted: d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })
+  };
+}
+
+function renderRecipeOfTheDay(rotd) {
+  if (!rotd) return;
+  currentRotdDish = rotd;
+
+  const badgeTextEl = document.getElementById("rotd-badge-text");
+  const dateEl = document.getElementById("rotd-date");
+  const titleEl = document.getElementById("rotd-title");
+  const reasonEl = document.getElementById("rotd-reason");
+  const cardEl = document.getElementById("rotd-card");
+
+  if (badgeTextEl) badgeTextEl.textContent = rotd.badge || "TODAY'S SPECIAL";
+  if (dateEl) dateEl.textContent = rotd.dateFormatted || new Date().toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
+  if (titleEl) titleEl.textContent = rotd.title || rotd.dish;
+  if (reasonEl) reasonEl.textContent = rotd.reason || "Curated kitchen master method.";
+
+  if (cardEl) {
+    cardEl.classList.remove("is-shuffling");
+    void cardEl.offsetWidth; // trigger reflow
+    cardEl.classList.add("is-shuffling");
+  }
+}
+
+function initRecipeOfTheDay() {
+  const rotd = getRecipeOfTheDay();
+  renderRecipeOfTheDay(rotd);
+
+  const cookBtn = document.getElementById("rotd-cook-btn");
+  const shuffleBtn = document.getElementById("rotd-shuffle-btn");
+
+  if (cookBtn) {
+    cookBtn.addEventListener("click", () => {
+      if (!currentRotdDish) return;
+      dishInput.value = currentRotdDish.dish || currentRotdDish.title;
+      presetPills.forEach(p => p.classList.remove("active"));
+      triggerAnalysis();
+    });
+  }
+
+  if (shuffleBtn) {
+    shuffleBtn.addEventListener("click", () => {
+      // Pick random different dish from vault
+      const currentTitle = currentRotdDish?.title || "";
+      const candidates = CULINARY_CALENDAR.vault.filter(v => v.title !== currentTitle);
+      const picked = candidates[Math.floor(Math.random() * candidates.length)] || CULINARY_CALENDAR.vault[0];
+      
+      const newRotd = {
+        ...picked,
+        type: "surprise",
+        badge: picked.badge || "🎲 CHEF'S SURPRISE",
+        dateFormatted: new Date().toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })
+      };
+
+      renderRecipeOfTheDay(newRotd);
+      showToast(`🎲 Rolled: ${newRotd.title} · Click "Cook today" to reveal!`);
+    });
+  }
+}
 
 // Application State: Starts in 'initial' state (Waiting on your clue)
 let currentState = "initial"; 
@@ -1097,6 +1602,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderRecipe(activeRecipe);
   setAppState("initial");
   bindEvents();
+  initRecipeOfTheDay();
 
   // Support direct deep-link or preview query parameter (?dish=...&variant=...)
   const urlParams = new URLSearchParams(window.location.search);
