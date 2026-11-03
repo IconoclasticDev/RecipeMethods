@@ -586,7 +586,7 @@ function setAppState(state, dishName) {
     visualTagText.textContent = "A USEFUL FIRST MOVE";
     btnText.textContent = "Reveal the recipe";
     // Bring image back to default wood board vector
-    updateSmallWindowImage("");
+    updateSmallWindowImage("", "initial");
   } else {
     bodyEl.classList.remove("state-initial");
     bodyEl.classList.add("state-analyzed");
@@ -594,30 +594,32 @@ function setAppState(state, dishName) {
     visualTagText.textContent = "HOUSE METHOD · READY";
     btnText.textContent = "Analyze again";
     // Show the dish photo on the left side of the text!
-    updateSmallWindowImage(dishName || activeRecipe?.title || dishInput.value);
+    const dish = dishName || activeRecipe?.title || dishInput.value;
+    updateSmallWindowImage(dish, "analyzed");
     triggerCelebration();
   }
 }
 
 // Curated Food Photography Dictionary for Small Window
 const DISH_PHOTO_MAP = [
-  { match: ["fettuccine", "alfredo", "carbonara", "cream pasta"], url: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=900&q=80" },
-  { match: ["chickpea", "golden chickpea", "chickpea skillet", "hummus"], url: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=80" },
-  { match: ["shakshuka", "shakshouka", "egg", "eggs", "poached egg"], url: "https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=900&q=80" },
-  { match: ["garlic pasta", "spaghetti", "pasta", "noodles", "linguine", "penne", "rigatoni", "lasagna", "bolognese"], url: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80" },
-  { match: ["salmon", "fish", "trout", "fillet", "cod", "sea bass"], url: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80" },
-  { match: ["shrimp", "prawn", "seafood", "lobster", "crab"], url: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=900&q=80" },
-  { match: ["tofu", "vegan", "vegetarian", "bowl"], url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80" },
-  { match: ["curry", "tikka", "masala", "butter chicken", "paneer", "korma"], url: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=80" },
-  { match: ["pizza", "flatbread", "focaccia", "margherita"], url: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80" },
-  { match: ["burger", "sandwich", "patty", "cheeseburger"], url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80" },
-  { match: ["taco", "fajita", "burrito", "quesadilla", "mexican"], url: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=900&q=80" },
-  { match: ["salad", "greens", "caesar", "avocado"], url: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80" },
-  { match: ["soup", "stew", "chowder", "broth", "ramen", "pho"], url: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80" },
-  { match: ["rice", "risotto", "biryani", "fried rice", "paella"], url: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=900&q=80" },
-  { match: ["steak", "beef", "meat", "ribeye", "roast"], url: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=900&q=80" },
-  { match: ["chicken", "wings", "roast chicken"], url: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=900&q=80" },
-  { match: ["cake", "dessert", "cookie", "pie", "chocolate", "pancake"], url: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80" }
+  { match: ["fettuccine", "alfredo", "classic fettuccine alfredo", "carbonara", "cream pasta", "white pasta"], url: "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=900&q=80" },
+  { match: ["chickpea", "golden chickpea", "chickpea skillet", "hummus", "chana"], url: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=80" },
+  { match: ["shakshuka", "shakshouka", "egg", "eggs", "poached egg", "frittata", "omelet"], url: "https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=900&q=80" },
+  { match: ["garlic pasta", "creamy garlic pasta", "aglio e olio", "spaghetti", "pasta", "noodles", "linguine", "penne", "rigatoni", "lasagna", "bolognese", "marinara", "pesto"], url: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80" },
+  { match: ["salmon", "crispy pan-seared salmon", "pan-seared salmon", "fish", "trout", "fillet", "cod", "sea bass", "halibut", "tuna"], url: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80" },
+  { match: ["shrimp", "prawn", "seafood", "lobster", "crab", "calamari", "scallops"], url: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=900&q=80" },
+  { match: ["curry", "tikka", "masala", "butter chicken", "paneer", "korma", "dal"], url: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=80" },
+  { match: ["pizza", "flatbread", "focaccia", "margherita", "pepperoni"], url: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80" },
+  { match: ["burger", "sandwich", "patty", "cheeseburger", "slider", "blt"], url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80" },
+  { match: ["taco", "tacos", "fajita", "burrito", "quesadilla", "mexican", "enchilada"], url: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=900&q=80" },
+  { match: ["salad", "greens", "caesar", "avocado", "greek salad", "kale"], url: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80" },
+  { match: ["soup", "stew", "chowder", "broth", "ramen", "pho", "noodle soup", "minestrone"], url: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80" },
+  { match: ["rice", "risotto", "biryani", "fried rice", "paella", "pilaf"], url: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=900&q=80" },
+  { match: ["steak", "beef", "meat", "ribeye", "sirloin", "roast", "brisket"], url: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=900&q=80" },
+  { match: ["chicken", "wings", "roast chicken", "fried chicken", "chicken breast"], url: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=900&q=80" },
+  { match: ["cake", "dessert", "cookie", "pie", "chocolate", "pancake", "waffle", "brownie"], url: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80" },
+  { match: ["bread", "toast", "sourdough", "bagel", "croissant"], url: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80" },
+  { match: ["tofu", "vegan", "vegetarian", "bowl", "stir fry"], url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80" }
 ];
 
 function getDishPhoto(dishName) {
@@ -633,12 +635,14 @@ function getDishPhoto(dishName) {
   return null;
 }
 
-function updateSmallWindowImage(dishName) {
+function updateSmallWindowImage(dishName, explicitState) {
   const visualRecipeImg = document.getElementById("visual-recipe-img");
   const woodBoard = document.getElementById("wood-board");
   if (!visualRecipeImg || !woodBoard) return;
 
-  if (currentState === "initial") {
+  const state = explicitState || currentState;
+
+  if (state === "initial") {
     visualRecipeImg.style.display = "none";
     visualRecipeImg.src = "";
     woodBoard.style.display = "flex";
@@ -691,8 +695,10 @@ function renderServingsAndIngredients(recipe) {
 
 // Render Recipe Data into the UI
 function renderRecipe(recipe) {
-  // Update the small window with picture of the typed recipe!
-  updateSmallWindowImage(recipe.title || dishInput.value);
+  // Update the small window with picture of the typed recipe if analyzed
+  if (currentState === "analyzed") {
+    updateSmallWindowImage(recipe.title || dishInput.value, "analyzed");
+  }
 
   // Section 02 Readout
   confidenceVal.textContent = recipe.confidence || "HIGH";
@@ -792,8 +798,8 @@ async function triggerAnalysis() {
       // Realistic brief culinary scanning delay
       await new Promise(resolve => setTimeout(resolve, 600));
       activeRecipe = CANONICAL_RECIPES[matchedKey];
+      setAppState("analyzed", activeRecipe.title);
       renderRecipe(activeRecipe);
-      setAppState("analyzed");
       smoothScrollToMethod();
       return;
     }
@@ -901,8 +907,8 @@ Make exactly 4 method steps. Mark key items as type 'gold' and optional as 'outl
 
     if (resultJson) {
       activeRecipe = resultJson;
+      setAppState("analyzed", activeRecipe.title);
       renderRecipe(activeRecipe);
-      setAppState("analyzed");
       smoothScrollToMethod();
     } else {
       throw new Error("Could not parse recipe");
@@ -913,8 +919,8 @@ Make exactly 4 method steps. Mark key items as type 'gold' and optional as 'outl
     // Graceful fallback to golden chickpea skillet
     activeRecipe = CANONICAL_RECIPES["golden chickpea skillet"];
     dishInput.value = "golden chickpea skillet";
+    setAppState("analyzed", activeRecipe.title);
     renderRecipe(activeRecipe);
-    setAppState("analyzed");
   } finally {
     submitBtn.disabled = false;
     btnText.textContent = "Analyze again";
