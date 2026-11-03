@@ -252,8 +252,167 @@ const methodDesc = document.getElementById("method-desc");
 const statIngredients = document.getElementById("stat-ingredients");
 const statMinutes = document.getElementById("stat-minutes");
 const statServings = document.getElementById("stat-servings");
+const servingsDecBtn = document.getElementById("servings-dec-btn");
+const servingsIncBtn = document.getElementById("servings-inc-btn");
 const gatherList = document.getElementById("gather-list");
 const stepsList = document.getElementById("steps-list");
+const stepsProgressCounter = document.getElementById("steps-progress-counter");
+const stepsProgressBar = document.getElementById("steps-progress-bar");
+const copyMethodBtn = document.getElementById("copy-method-btn");
+const printRecipeBtn = document.getElementById("print-recipe-btn");
+
+// Toast & Timer Dock Elements
+const kitchenToast = document.getElementById("kitchen-toast");
+const floatingTimerDock = document.getElementById("floating-timer-dock");
+const timerDockLabel = document.getElementById("timer-dock-label");
+const timerDockTime = document.getElementById("timer-dock-time");
+const timerDockToggle = document.getElementById("timer-dock-toggle");
+const timerDockClose = document.getElementById("timer-dock-close");
+
+// UI State & Timer Variables
+let currentServings = 2;
+let baseServings = 2;
+let activeTimerInterval = null;
+let activeTimerRemaining = 0;
+let isTimerPaused = false;
+let toastTimeout = null;
+
+// Haptic & Sensory UI Feedback Helpers
+function showToast(message) {
+  if (!kitchenToast) return;
+  kitchenToast.textContent = message;
+  kitchenToast.classList.add("show");
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => {
+    kitchenToast.classList.remove("show");
+  }, 2600);
+}
+
+function playKitchenChime() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15); // A5
+    gain.gain.setValueAtTime(0.35, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 1.2);
+  } catch (e) {}
+}
+
+function triggerCelebration() {
+  try {
+    if (typeof confetti === "function") {
+      confetti({
+        particleCount: 50,
+        spread: 65,
+        origin: { y: 0.65 },
+        colors: ["#D4A23A", "#E2BF65", "#F6F4EF", "#3E6F48"]
+      });
+    }
+  } catch (e) {}
+}
+
+function scaleQuantityString(qtyStr, ratio) {
+  if (!qtyStr || ratio === 1) return qtyStr;
+  return qtyStr.replace(/(\d*\.?\d+|\d+½|½|¼|¾)/g, (match) => {
+    let val = 0;
+    if (match === "½") val = 0.5;
+    else if (match === "¼") val = 0.25;
+    else if (match === "¾") val = 0.75;
+    else if (match.includes("½")) val = parseFloat(match) + 0.5;
+    else val = parseFloat(match);
+    if (isNaN(val)) return match;
+    const scaled = Math.round(val * ratio * 10) / 10;
+    return scaled % 1 === 0 ? scaled.toString() : scaled.toFixed(1);
+  });
+}
+
+function extractTimeInSeconds(text) {
+  if (!text) return null;
+  const minMatch = text.match(/(\d+)(?:\s*[–-]\s*\d+)?\s*(?:minutes|minute|min)/i);
+  if (minMatch) {
+    return { seconds: parseInt(minMatch[1], 10) * 60, display: `${minMatch[1]}m` };
+  }
+  const secMatch = text.match(/(\d+)\s*(?:seconds|second|sec)/i);
+  if (secMatch) {
+    return { seconds: parseInt(secMatch[1], 10), display: `${secMatch[1]}s` };
+  }
+  return null;
+}
+
+function startKitchenTimer(seconds, label) {
+  clearInterval(activeTimerInterval);
+  activeTimerRemaining = seconds;
+  isTimerPaused = false;
+  if (floatingTimerDock) floatingTimerDock.style.display = "block";
+  if (timerDockLabel) timerDockLabel.textContent = label || "Step Timer";
+  if (timerDockToggle) timerDockToggle.textContent = "PAUSE";
+  updateTimerDockDisplay();
+  showToast(`Timer started: ${label}`);
+
+  activeTimerInterval = setInterval(() => {
+    if (!isTimerPaused) {
+      activeTimerRemaining--;
+      updateTimerDockDisplay();
+      if (activeTimerRemaining <= 0) {
+        clearInterval(activeTimerInterval);
+        playKitchenChime();
+        showToast(`⏱ Timer completed for ${label}!`);
+        if (timerDockTime) timerDockTime.textContent = "00:00 DONE!";
+        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+      }
+    }
+  }, 1000);
+}
+
+function formatMinutes(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+}
+
+function updateTimerDockDisplay() {
+  if (timerDockTime) {
+    timerDockTime.textContent = formatMinutes(activeTimerRemaining);
+  }
+}
+
+function updateStepProgress() {
+  const allCards = stepsList.querySelectorAll(".step-card");
+  const total = allCards.length;
+  const completed = stepsList.querySelectorAll(".step-card.is-step-completed").length;
+  if (stepsProgressCounter) {
+    stepsProgressCounter.textContent = `${completed} of ${total} steps completed`;
+  }
+  if (stepsProgressBar) {
+    const percent = total > 0 ? (completed / total) * 100 : 0;
+    stepsProgressBar.style.width = `${percent}%`;
+  }
+}
+
+function formatRecipeForClipboard(recipe, servings) {
+  let text = `${recipe.title}\n${recipe.description}\n\n`;
+  text += `Servings: ${servings} · Time: ${recipe.minutes || 25} MIN · Difficulty: ${recipe.difficulty || "EASY"}\n\n`;
+  text += `GATHER:\n`;
+  (recipe.gather || []).forEach(item => {
+    const qty = scaleQuantityString(item.qty, servings / baseServings);
+    text += `- ${item.name} (${qty})${item.optional ? " [Optional]" : ""}\n`;
+  });
+  text += `\nDO THIS:\n`;
+  (recipe.steps || []).forEach(step => {
+    text += `${step.num}. ${step.title}: ${step.text}\n`;
+  });
+  text += `\nRecipeMethods — Kitchen Companion. A method, not a guess.`;
+  return text;
+}
 
 // Photo & Camera Elements
 const photoDropzone = document.getElementById("photo-dropzone");
@@ -333,9 +492,63 @@ function bindEvents() {
     dropzoneTitle.textContent = "Choose a food photo";
     presetPills.forEach(p => p.classList.remove("active"));
     updateSmallWindowImage("");
+    currentServings = 2;
+    clearInterval(activeTimerInterval);
+    if (floatingTimerDock) floatingTimerDock.style.display = "none";
     dishInput.focus();
     window.scrollTo({ top: 0, behavior: "smooth" });
+    showToast("Kitchen reset to starting clue.");
   });
+
+  // Servings Stepper Handlers
+  if (servingsDecBtn) {
+    servingsDecBtn.addEventListener("click", () => {
+      if (currentServings > 1) {
+        currentServings--;
+        renderServingsAndIngredients(activeRecipe);
+        showToast(`Recipe scaled to ${currentServings} servings`);
+      }
+    });
+  }
+  if (servingsIncBtn) {
+    servingsIncBtn.addEventListener("click", () => {
+      if (currentServings < 12) {
+        currentServings++;
+        renderServingsAndIngredients(activeRecipe);
+        showToast(`Recipe scaled to ${currentServings} servings`);
+      }
+    });
+  }
+
+  // Method Action Buttons
+  if (copyMethodBtn) {
+    copyMethodBtn.addEventListener("click", () => {
+      const clipText = formatRecipeForClipboard(activeRecipe, currentServings);
+      navigator.clipboard.writeText(clipText).then(() => {
+        showToast("Method copied to kitchen clipboard ✓");
+      }).catch(() => {
+        showToast("Recipe method formatted!");
+      });
+    });
+  }
+  if (printRecipeBtn) {
+    printRecipeBtn.addEventListener("click", () => window.print());
+  }
+
+  // Floating Timer Controls
+  if (timerDockToggle) {
+    timerDockToggle.addEventListener("click", () => {
+      isTimerPaused = !isTimerPaused;
+      timerDockToggle.textContent = isTimerPaused ? "RESUME" : "PAUSE";
+      showToast(isTimerPaused ? "Timer paused" : "Timer resumed");
+    });
+  }
+  if (timerDockClose) {
+    timerDockClose.addEventListener("click", () => {
+      clearInterval(activeTimerInterval);
+      if (floatingTimerDock) floatingTimerDock.style.display = "none";
+    });
+  }
 
   // File Upload Handlers
   photoDropzone.addEventListener("click", () => fileInput.click());
@@ -382,6 +595,7 @@ function setAppState(state, dishName) {
     btnText.textContent = "Analyze again";
     // Show the dish photo on the left side of the text!
     updateSmallWindowImage(dishName || activeRecipe?.title || dishInput.value);
+    triggerCelebration();
   }
 }
 
@@ -439,6 +653,42 @@ function updateSmallWindowImage(dishName) {
   woodBoard.style.display = "none";
 }
 
+// Render Gather list with dynamic servings multiplier
+function renderServingsAndIngredients(recipe) {
+  if (!recipe || !gatherList) return;
+  if (statServings) statServings.textContent = currentServings;
+  gatherList.innerHTML = "";
+  const ratio = currentServings / baseServings;
+
+  (recipe.gather || []).forEach((item) => {
+    const row = document.createElement("div");
+    row.className = `ingredient-row ${item.checked ? "checked" : ""} ${item.optional ? "is-optional" : ""}`;
+    const scaledQty = scaleQuantityString(item.qty, ratio);
+    row.innerHTML = `
+      <div class="ingredient-left">
+        <div class="custom-checkbox">
+          ${item.checked ? '<span class="checkbox-mark">✓</span>' : '<span class="checkbox-dot"></span>'}
+        </div>
+        <div class="ingredient-meta">
+          <span class="ingredient-name">${item.name}</span>
+          ${item.optional ? '<span class="optional-badge">OPTIONAL</span>' : ''}
+        </div>
+      </div>
+      <span class="ingredient-qty">${scaledQty}</span>
+    `;
+
+    // Interactive checkbox toggle
+    row.addEventListener("click", () => {
+      item.checked = !item.checked;
+      row.classList.toggle("checked", item.checked);
+      const box = row.querySelector(".custom-checkbox");
+      box.innerHTML = item.checked ? '<span class="checkbox-mark">✓</span>' : '<span class="checkbox-dot"></span>';
+    });
+
+    gatherList.appendChild(row);
+  });
+}
+
 // Render Recipe Data into the UI
 function renderRecipe(recipe) {
   // Update the small window with picture of the typed recipe!
@@ -469,38 +719,15 @@ function renderRecipe(recipe) {
   methodDesc.textContent = recipe.description;
   statIngredients.textContent = recipe.ingredientsCount || (recipe.gather ? recipe.gather.length : 10);
   statMinutes.textContent = recipe.minutes || 25;
-  statServings.textContent = recipe.servings || "2–3";
 
-  // Gather list
-  gatherList.innerHTML = "";
-  (recipe.gather || []).forEach((item, index) => {
-    const row = document.createElement("div");
-    row.className = `ingredient-row ${item.checked ? "checked" : ""} ${item.optional ? "is-optional" : ""}`;
-    row.innerHTML = `
-      <div class="ingredient-left">
-        <div class="custom-checkbox">
-          ${item.checked ? '<span class="checkbox-mark">✓</span>' : '<span class="checkbox-dot"></span>'}
-        </div>
-        <div class="ingredient-meta">
-          <span class="ingredient-name">${item.name}</span>
-          ${item.optional ? '<span class="optional-badge">OPTIONAL</span>' : ''}
-        </div>
-      </div>
-      <span class="ingredient-qty">${item.qty}</span>
-    `;
+  // Set base servings and render adaptive ingredient list
+  let rawServings = recipe.servings || "2";
+  let firstDigit = parseInt(rawServings.toString().match(/\d+/)?.[0] || "2", 10);
+  baseServings = firstDigit || 2;
+  currentServings = baseServings;
+  renderServingsAndIngredients(recipe);
 
-    // Interactive checkbox toggle
-    row.addEventListener("click", () => {
-      item.checked = !item.checked;
-      row.classList.toggle("checked", item.checked);
-      const box = row.querySelector(".custom-checkbox");
-      box.innerHTML = item.checked ? '<span class="checkbox-mark">✓</span>' : '<span class="checkbox-dot"></span>';
-    });
-
-    gatherList.appendChild(row);
-  });
-
-  // Steps list
+  // Steps list with interactive checkmarks and timers
   stepsList.innerHTML = "";
   (recipe.steps || []).forEach(step => {
     const card = document.createElement("div");
@@ -512,8 +739,32 @@ function renderRecipe(recipe) {
         <p class="step-instructions">${step.text}</p>
       </div>
     `;
+
+    // Step completion toggle on click
+    card.addEventListener("click", (e) => {
+      if (e.target.closest(".step-timer-pill")) return;
+      card.classList.toggle("is-step-completed");
+      updateStepProgress();
+    });
+
+    // Detect time and inject Timer button
+    const timeObj = extractTimeInSeconds(step.text);
+    if (timeObj) {
+      const timerBtn = document.createElement("button");
+      timerBtn.type = "button";
+      timerBtn.className = "step-timer-pill";
+      timerBtn.innerHTML = `⏱ Start ${timeObj.display} Timer`;
+      timerBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        startKitchenTimer(timeObj.seconds, `${step.num} ${step.title}`);
+      });
+      card.querySelector(".step-content").appendChild(timerBtn);
+    }
+
     stepsList.appendChild(card);
   });
+
+  updateStepProgress();
 }
 
 // Trigger Analysis: Analyzes first, then reveals the recipe!
