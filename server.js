@@ -131,14 +131,15 @@ const server = http.createServer(async (req, res) => {
         const dishName = (payload.dishName || "").trim();
         const imageBase64 = payload.imageBase64;
         const imageMime = payload.imageMime;
+        const variant = (payload.variant || "standard").toLowerCase();
 
-        if (!imageBase64 && (!dishName || dishName.toLowerCase().includes("golden chickpea") || dishName.toLowerCase().includes("chickpea skillet"))) {
+        if (!imageBase64 && variant === "standard" && (!dishName || dishName.toLowerCase().includes("golden chickpea") || dishName.toLowerCase().includes("chickpea skillet"))) {
           res.writeHead(200, { "Content-Type": "application/json" });
           res.end(JSON.stringify(CANONICAL_SKILLET));
           return;
         }
 
-        const recipeData = await queryGeminiWithRetry(dishName, imageBase64, imageMime);
+        const recipeData = await queryGeminiWithRetry(dishName, imageBase64, imageMime, variant);
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(recipeData));
       } catch (err) {
@@ -178,11 +179,40 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-async function queryGeminiWithRetry(dishName, imageBase64, imageMime) {
+async function queryGeminiWithRetry(dishName, imageBase64, imageMime, variant = "standard") {
   const parts = [];
+
+  let dietaryGuidance = "";
+  if (variant === "jain") {
+    dietaryGuidance = `\nSTRICT DIETARY REQUIREMENT — JAIN COMPLIANT:
+- Absolutely NO onion, NO garlic, and NO root vegetables (no potatoes, carrots, ginger, radish, beetroot, garlic, shallots).
+- Create rich savory depth and aromatic warmth using asafoetida (hing), cumin, fennel, vine tomatoes, coriander, green chilies, dairy (sweet butter, cream, paneer), or legumes.
+- The title should clearly reflect this adaptation, e.g. "Dish Name (Jain Method)".`;
+  } else if (variant === "healthier") {
+    dietaryGuidance = `\nSTRICT DIETARY REQUIREMENT — HEALTHIER VERSION:
+- Reduce saturated fats and heavy cream/butter by 50-70%; emulsify using vegetable purees, starchy pasta water, or light dairy/olive oil.
+- Boost fiber and micronutrients by incorporating greens (spinach, kale, broccoli, zucchini).
+- Use whole grains or lean proteins, lower refined sodium, and finish with vibrant fresh citrus zest/herbs.
+- The title should clearly reflect this adaptation, e.g. "Lightened Dish Name".`;
+  } else if (variant === "vegetarian") {
+    dietaryGuidance = `\nSTRICT DIETARY REQUIREMENT — 100% VEGETARIAN:
+- Strictly NO meat, poultry, fish, seafood, gelatin, or animal broths.
+- If the original dish has meat/fish, replace with rich savory umami textures like marinated paneer, oyster/cremini mushrooms, chickpeas, or spiced tofu.
+- The title should clearly reflect this adaptation, e.g. "Vegetarian Dish Name".`;
+  } else if (variant === "vegan") {
+    dietaryGuidance = `\nSTRICT DIETARY REQUIREMENT — 100% PLANT-BASED VEGAN:
+- Zero animal products: NO dairy, meat, eggs, or honey.
+- Use cashew cream, oat milk, olive oil, nutritional yeast, tofu, or legumes.
+- The title should clearly reflect this adaptation, e.g. "Plant-Based Dish Name".`;
+  } else if (variant === "glutenfree") {
+    dietaryGuidance = `\nSTRICT DIETARY REQUIREMENT — GLUTEN-FREE:
+- Zero wheat, barley, rye, or regular flour. Use certified gluten-free grains, rice, corn, or gluten-free alternatives.
+- The title should clearly reflect this adaptation, e.g. "Gluten-Free Dish Name".`;
+  }
 
   const promptText = `You are RecipeMethods, an elite culinary method engine.
 Given a dish name or a food photo, extract and formulate a concise, structured cooking method.
+${dietaryGuidance}
 Return ONLY valid JSON with this exact schema:
 {
   "title": "Dish Name",
@@ -217,9 +247,9 @@ Make exactly 4 method steps with numbered titles. Mark essential core ingredient
         data: imageBase64
       }
     });
-    parts.push({ text: `Analyze this food image. Infer the ingredients and dish, then output the RecipeMethods JSON structure. Dish clue: ${dishName || 'auto-detect'}\n\n${promptText}` });
+    parts.push({ text: `Analyze this food image. Infer the ingredients and dish, then output the RecipeMethods JSON structure. Dish clue: ${dishName || 'auto-detect'}. Dietary requirement: ${variant}\n\n${promptText}` });
   } else {
-    parts.push({ text: `Generate the complete RecipeMethods structure for this dish: "${dishName}".\n\n${promptText}` });
+    parts.push({ text: `Generate the complete RecipeMethods structure for this dish: "${dishName}". Dietary requirement: ${variant}\n\n${promptText}` });
   }
 
   for (const model of FALLBACK_MODELS) {

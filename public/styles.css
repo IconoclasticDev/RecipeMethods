@@ -371,6 +371,90 @@ body {
   border-color: var(--text-dark);
 }
 
+/* Dietary Profile / Variation Toggles in Hero Card */
+.diet-toggles-section {
+  margin: 14px 0 16px 0;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--border-light-strong);
+  border-radius: 6px;
+}
+
+.diet-toggles-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.diet-toggles-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-dark-light);
+}
+
+.diet-toggles-active-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #7A530F;
+  background: rgba(212, 162, 58, 0.18);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(212, 162, 58, 0.35);
+}
+
+.diet-pills-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.diet-pill {
+  border: 1px solid var(--border-light-strong);
+  background: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  color: var(--text-dark-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.diet-pill .pill-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-dark-muted);
+}
+
+.diet-pill:hover {
+  background: #FFFFFF;
+  color: var(--text-dark);
+  border-color: var(--text-dark-light);
+  transform: translateY(-1px);
+}
+
+.diet-pill.active {
+  background: var(--text-dark);
+  color: #FFFFFF;
+  border-color: var(--accent-gold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px var(--accent-gold);
+}
+
+.diet-pill.active .pill-dot {
+  background: var(--accent-gold);
+}
+
 .divider-row {
   display: flex;
   align-items: center;
@@ -767,6 +851,8 @@ body.state-analyzed #visual-recipe-img {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
   margin-bottom: 14px;
 }
 
@@ -1013,6 +1099,93 @@ body.state-analyzed #visual-recipe-img {
 }
 
 /* Method Utility Bar (Flow Progress & Tools) */
+/* Section 02 Diet Variant Pill */
+.diet-variant-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #1A1410;
+  background: linear-gradient(135deg, #F5D982 0%, #D4A23A 100%);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(212, 162, 58, 0.25);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Section 03 Live Method Adaptation Switcher Bar */
+.method-diet-dock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--border-light-strong);
+  padding: 12px 18px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(8px);
+}
+
+.method-diet-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.method-diet-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-dark);
+}
+
+.method-diet-sub {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-dark-muted);
+}
+
+.method-diet-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.method-diet-btn {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light-strong);
+  border-radius: 9999px;
+  padding: 5px 12px;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-dark-muted);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.method-diet-btn:hover {
+  background: #FAF8F5;
+  color: var(--text-dark);
+  border-color: var(--text-dark);
+  transform: translateY(-1px);
+}
+
+.method-diet-btn.active {
+  background: var(--text-dark);
+  color: #FFFFFF;
+  border-color: var(--accent-gold);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--accent-gold);
+}
+
 .method-utility-bar {
   display: flex;
   align-items: center;
@@ -1713,6 +1886,12 @@ body.state-analyzed #section-03 {
   .method-header-grid {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .method-diet-dock {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .method-content-grid {

@@ -101,6 +101,34 @@
                   <button type="button" class="preset-pill" data-dish="classic fettuccine alfredo">Fettuccine Alfredo</button>
                 </div>
 
+                <!-- Dietary Preference / Variation Toggles -->
+                <div class="diet-toggles-section">
+                  <div class="diet-toggles-header">
+                    <span class="diet-toggles-label">DIETARY PREFERENCE:</span>
+                    <span class="diet-toggles-active-badge" id="input-diet-badge">House Method</span>
+                  </div>
+                  <div class="diet-pills-wrap" id="input-diet-toggles">
+                    <button type="button" class="diet-pill active" data-variant="standard">
+                      <span class="pill-dot"></span> Standard
+                    </button>
+                    <button type="button" class="diet-pill" data-variant="healthier">
+                      <span class="pill-icon">🥗</span> Healthier
+                    </button>
+                    <button type="button" class="diet-pill" data-variant="jain">
+                      <span class="pill-icon">🌱</span> Jain
+                    </button>
+                    <button type="button" class="diet-pill" data-variant="vegetarian">
+                      <span class="pill-icon">🌿</span> Vegetarian
+                    </button>
+                    <button type="button" class="diet-pill" data-variant="vegan">
+                      <span class="pill-icon">🥑</span> Vegan
+                    </button>
+                    <button type="button" class="diet-pill" data-variant="glutenfree">
+                      <span class="pill-icon">🌾</span> Gluten-Free
+                    </button>
+                  </div>
+                </div>
+
                 <div class="divider-row">
                   <span class="divider-line"></span>
                   <span class="divider-text">OR USE A PHOTO</span>
@@ -304,6 +332,7 @@
                     <span class="amber-dot">●</span>
                     <span class="analyzed-tag">JUST ANALYZED</span>
                   </div>
+                  <span class="diet-variant-pill" id="diet-variant-pill" style="display: none;"></span>
                   <div class="confidence-tag">
                     KITCHEN CONFIDENCE <strong id="confidence-val">HIGH</strong>
                   </div>
@@ -401,6 +430,34 @@
         </div>
 
         <div class="method-horizontal-divider"></div>
+
+        <!-- Live Method Adaptation Switcher Bar -->
+        <div class="method-diet-dock" id="method-diet-dock">
+          <div class="method-diet-left">
+            <span class="method-diet-tag">ADAPT METHOD</span>
+            <span class="method-diet-sub">Instant dietary transformation</span>
+          </div>
+          <div class="method-diet-pills" id="method-diet-toggles">
+            <button type="button" class="method-diet-btn active" data-variant="standard">
+              House Method
+            </button>
+            <button type="button" class="method-diet-btn" data-variant="healthier">
+              🥗 Healthier
+            </button>
+            <button type="button" class="method-diet-btn" data-variant="jain">
+              🌱 Jain (No Onion/Garlic)
+            </button>
+            <button type="button" class="method-diet-btn" data-variant="vegetarian">
+              🌿 Vegetarian
+            </button>
+            <button type="button" class="method-diet-btn" data-variant="vegan">
+              🥑 Vegan
+            </button>
+            <button type="button" class="method-diet-btn" data-variant="glutenfree">
+              🌾 Gluten-Free
+            </button>
+          </div>
+        </div>
 
         <!-- Cooking Flow Progress & Quick Tool Actions Bar -->
         <div class="method-utility-bar">
